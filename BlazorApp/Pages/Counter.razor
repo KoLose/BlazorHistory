@@ -1,19 +1,43 @@
 ﻿@page "/counter"
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
 
-<PageTitle>Counter</PageTitle>
-
-<h1>Counter</h1>
-
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<PageTitle>MovieTable</PageTitle>
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>ImageUrl</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var image in images)
+    {
+        <tr>
+            <td>@image.Id</td>
+            <td>@image.Name</td>
+            <td>@image.ImageUrl</td>
+            <td><a href="#">Edit</a></td>
+            <td><a href="#">Delete</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
 
 @code {
-    private int currentCount = 0;
+    private List<ImageDataShort> images = new();
+    [Inject] private RequestApi _apiRequest { get; set; }
 
-    private void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        await GetAllImages();
     }
 
+    private async Task GetAllImages()
+    {
+        var imageData = await _apiRequest.GetAllImagesAsync();
+        //users = userData.data.users ?? new List<UserDataShort>();
+        images = imageData?.data?.image ?? new List<ImageDataShort>();
+    }
 }
