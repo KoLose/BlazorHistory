@@ -1,0 +1,27 @@
+# Build outputs
+bin/
+obj/
+out/
+publish/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userprefs
+
+# IDE folders
+.vs/
+.vscode/
+.idea/
+
+# Rider
+*.sln.iml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+

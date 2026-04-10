@@ -7,7 +7,12 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp  => new HttpClient { BaseAddress = new Uri("http://localhost:5248") });
+// Local
+// builder.Services.AddScoped(sp  => new HttpClient { BaseAddress = new Uri("http://localhost:5248") });
+
+// Host
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://webapihistory.onrender.com/api/") });
+
 builder.Services.AddScoped<RequestApi>();
 
 await builder.Build().RunAsync();
