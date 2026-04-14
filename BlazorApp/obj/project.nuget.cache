@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2cz3A3iEoRc=",
+  "dgSpecHash": "w/rkKIiO2VU=",
   "success": true,
   "projectFilePath": "/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/BlazorApp.csproj",
   "expectedPackageFiles": [
+    "/Users/kolose/.nuget/packages/blazorinputfileextended/2.4.22/blazorinputfileextended.2.4.22.nupkg.sha512",
     "/Users/kolose/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.5/microsoft.aspnetcore.app.internal.assets.10.0.5.nupkg.sha512",
     "/Users/kolose/.nuget/packages/microsoft.aspnetcore.authorization/10.0.5/microsoft.aspnetcore.authorization.10.0.5.nupkg.sha512",
     "/Users/kolose/.nuget/packages/microsoft.aspnetcore.components/10.0.5/microsoft.aspnetcore.components.10.0.5.nupkg.sha512",

@@ -2,28 +2,25 @@
 @using BlazorApp.ApiRequest
 @using BlazorApp.ApiRequest.Model
 
-<PageTitle>MovieTable</PageTitle>
-<table class="table">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>Name</th>
-        <th>ImageUrl</th>
-    </tr>
-    </thead>
-    <tbody>
+<PageTitle>Список документов</PageTitle>
+
+<div class="cards">
     @foreach (var image in images)
     {
-        <tr>
-            <td>@image.Id</td>
-            <td>@image.Name</td>
-            <td>@image.ImageUrl</td>
-            <td><a href="#">Edit</a></td>
-            <td><a href="#">Delete</a></td>
-        </tr>
+        <div class="card">
+            <img src="@image.ImageUrl" alt="Document" />
+            
+            @if (!string.IsNullOrEmpty(image.ExcelUrl))
+            {
+                <p><a href="@image.ExcelUrl" target="_blank">📥 Скачать Excel</a></p>
+            }
+            else
+            {
+                <p>Обработка...</p>
+            }
+        </div>
     }
-    </tbody>
-</table>
+</div>
 
 @code {
     private List<ImageDataShort> images = new();
@@ -37,7 +34,6 @@
     private async Task GetAllImages()
     {
         var imageData = await _apiRequest.GetAllImagesAsync();
-        //users = userData.data.users ?? new List<UserDataShort>();
         images = imageData?.data?.image ?? new List<ImageDataShort>();
     }
 }

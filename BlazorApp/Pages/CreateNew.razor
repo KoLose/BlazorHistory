@@ -1,0 +1,74 @@
+@page "/request"
+@inject BlazorApp.ApiRequest.RequestApi Api
+@inject NavigationManager Navigation
+
+<PageTitle>Создать запрос</PageTitle>
+
+<h3>Загрузка документа</h3>
+
+<InputFile OnChange="HandleFileUpload" accept="image/*" />
+
+@if (_isUploading)
+{
+    <div class="alert alert-info">⏳ Идет распознавание и создание Excel... Пожалуйста, подождите.</div>
+}
+
+@if (_errorMessage != null)
+{
+    <div class="alert alert-danger">❌ @_errorMessage</div>
+}
+
+@if (_successMessage != null)
+{
+    <div class="alert alert-success">✅ @_successMessage</div>
+}
+
+@code {
+    private bool _isUploading = false;
+    private string? _errorMessage;
+    private string? _successMessage;
+
+    async Task HandleFileUpload(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file == null) return;
+
+        _errorMessage = null;
+        _successMessage = null;
+        _isUploading = true;
+
+        try
+        {
+            if (!file.ContentType.StartsWith("image/"))
+            {
+                _errorMessage = "Пожалуйста, выберите изображение.";
+                _isUploading = false;
+                return;
+            }
+
+            long maxBytes = 15 * 1024 * 1024;
+            
+            using var stream = file.OpenReadStream(maxAllowedSize: maxBytes);
+            
+            var result = await Api.UploadImageAsync(stream, file.Name);
+
+            if (result.status)
+            {
+                _successMessage = "Файл успешно обработан и сохранен!";
+                Navigation.NavigateTo("/counter");
+            }
+            else
+            {
+                _errorMessage = "Сервер вернул ошибку при обработке.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Произошла ошибка: {ex.Message}";
+        }
+        finally
+        {
+            _isUploading = false;
+        }
+    }
+}

@@ -2,6 +2,31 @@
   "version": 3,
   "targets": {
     "net10.0": {
+      "BlazorInputFileExtended/2.4.22": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "6.0.20"
+        },
+        "compile": {
+          "lib/net6.0/BlazorInputFileExtended.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/BlazorInputFileExtended.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/net6.0/icon-512.png": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        },
+        "build": {
+          "buildTransitive/BlazorInputFileExtended.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BlazorInputFileExtended.props": {}
+        }
+      },
       "Microsoft.AspNetCore.App.Internal.Assets/10.0.5": {
         "type": "package",
         "build": {
@@ -544,6 +569,31 @@
       }
     },
     "net10.0/browser-wasm": {
+      "BlazorInputFileExtended/2.4.22": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "6.0.20"
+        },
+        "compile": {
+          "lib/net6.0/BlazorInputFileExtended.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/BlazorInputFileExtended.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/net6.0/icon-512.png": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        },
+        "build": {
+          "buildTransitive/BlazorInputFileExtended.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BlazorInputFileExtended.props": {}
+        }
+      },
       "Microsoft.AspNetCore.App.Internal.Assets/10.0.5": {
         "type": "package",
         "build": {
@@ -1087,6 +1137,30 @@
     }
   },
   "libraries": {
+    "BlazorInputFileExtended/2.4.22": {
+      "sha512": "Xygdk4oNbFmWhr38Fg828DyJwvoM5JjPi7dDCqtKVEWGxzTJKpr0zI7e70wN4TCSwCo0naAni6OTBBnYxNsZAQ==",
+      "type": "package",
+      "path": "blazorinputfileextended/2.4.22",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "README.md",
+        "blazorinputfileextended.2.4.22.nupkg.sha512",
+        "blazorinputfileextended.nuspec",
+        "build/BlazorInputFileExtended.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/BlazorInputFileExtended.props",
+        "buildTransitive/BlazorInputFileExtended.props",
+        "content/icon-512.png",
+        "contentFiles/any/net6.0/icon-512.png",
+        "icon-512.png",
+        "lib/net6.0/BlazorInputFileExtended.dll",
+        "staticwebassets/BlazorInputFileExtended.bundle.scp.css",
+        "staticwebassets/DragAndDrop.js",
+        "staticwebassets/DragAndDrop1316.js"
+      ]
+    },
     "Microsoft.AspNetCore.App.Internal.Assets/10.0.5": {
       "sha512": "Oxw9Ps1/nd6c/EMCAI13AeJFEqXezAvCEOshMjUWmL7LeGirHJNzytR2e/3jINYg0j2TmPvNUowGHf+gp8zDSQ==",
       "type": "package",
@@ -2127,6 +2201,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "BlazorInputFileExtended >= 2.4.22",
       "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.5",
       "Microsoft.AspNetCore.Components.WebAssembly >= 10.0.5",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 10.0.5",
@@ -2178,6 +2253,10 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
+          "BlazorInputFileExtended": {
+            "target": "Package",
+            "version": "[2.4.22, )"
+          },
           "Microsoft.AspNetCore.App.Internal.Assets": {
             "suppressParent": "All",
             "target": "Package",
