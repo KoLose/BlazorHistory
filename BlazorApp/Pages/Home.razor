@@ -1,74 +1,39 @@
 ﻿@page "/"
-@inject ApiRequest.RequestApi Api
-@inject NavigationManager Navigation
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
 
-<PageTitle>Создать запрос</PageTitle>
-
-<h3>Загрузка документа</h3>
-
-<InputFile OnChange="HandleFileUpload" accept="image/*" />
-
-@if (_isUploading)
-{
-    <div class="alert alert-info">⏳ Идет распознавание и создание Excel... Пожалуйста, подождите.</div>
-}
-
-@if (_errorMessage != null)
-{
-    <div class="alert alert-danger">❌ @_errorMessage</div>
-}
-
-@if (_successMessage != null)
-{
-    <div class="alert alert-success">✅ @_successMessage</div>
-}
-
-@code {
-    private bool _isUploading = false;
-    private string? _errorMessage;
-    private string? _successMessage;
-
-    async Task HandleFileUpload(InputFileChangeEventArgs e)
+<PageTitle>Список запросов</PageTitle>
+<a href="/request">Создать новый запрос</a>
+<div class="cards">
+    @foreach (var image in images)
     {
-        var file = e.File;
-        if (file == null) return;
-
-        _errorMessage = null;
-        _successMessage = null;
-        _isUploading = true;
-
-        try
-        {
-            if (!file.ContentType.StartsWith("image/"))
-            {
-                _errorMessage = "Пожалуйста, выберите изображение.";
-                _isUploading = false;
-                return;
-            }
-
-            long maxBytes = 15 * 1024 * 1024;
+        <div class="card">
+            <img src="@image.ImageUrl" alt="Document" />
             
-            using var stream = file.OpenReadStream(maxAllowedSize: maxBytes);
-            
-            var result = await Api.UploadImageAsync(stream, file.Name);
-
-            if (result.status)
+            @if (!string.IsNullOrEmpty(image.ExcelUrl))
             {
-                _successMessage = "Файл успешно обработан и сохранен!";
-                Navigation.NavigateTo("/counter");
+                <p><a href="@image.ExcelUrl" target="_blank">📥 Скачать Excel</a></p>
             }
             else
             {
-                _errorMessage = "Сервер вернул ошибку при обработке.";
+                <p>Обработка...</p>
             }
-        }
-        catch (Exception ex)
-        {
-            _errorMessage = $"Произошла ошибка: {ex.Message}";
-        }
-        finally
-        {
-            _isUploading = false;
-        }
+        </div>
+    }
+</div>
+
+@code {
+    private List<ImageDataShort> images = new();
+    [Inject] private RequestApi _apiRequest { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetAllImages();
+    }
+
+    private async Task GetAllImages()
+    {
+        var imageData = await _apiRequest.GetAllImagesAsync();
+        images = imageData?.data?.image ?? new List<ImageDataShort>();
     }
 }

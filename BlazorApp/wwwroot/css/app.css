@@ -138,3 +138,56 @@ code {
 .card p {
     margin: 5px 0;
 }
+
+/* Header */
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #4285B4;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+}
+
+.header-logo img{
+    width: 31%;
+}
+
+.header a {
+    all: unset;
+    color: #4285B4;
+    cursor: default;
+}
+
+.header-block {
+    width: 145px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    background-color: white;
+    transition: transform 0.1s ease;
+}
+
+.header-block:hover {
+    transform: scale(1.05);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285B4;
+    font-size: 20px;
+    padding: 0px 20px 0px 10px;
+    color: white;
+}

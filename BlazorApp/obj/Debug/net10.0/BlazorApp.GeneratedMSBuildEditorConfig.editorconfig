@@ -32,6 +32,18 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Layout/Header.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L0hlYWRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/Contacts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29udGFjdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

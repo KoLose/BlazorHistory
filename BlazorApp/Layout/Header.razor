@@ -1,0 +1,33 @@
+@inject NavigationManager NavigationManager
+<header>
+    <div class="header container">
+    
+        <div class="header-block header-logo">
+            <img src="images/banana-logo.png" alt="Logo"/>
+            <a>Banana</a>
+        </div>
+        
+        <div class="header-block" @onclick="GoHome">
+            <a href="/">Главное</a>
+        </div>
+        
+        <div class="header-block" @onclick="GoContacts">
+            <a href="/contacts">Контакты</a>
+        </div>
+        
+        <div class="header-block" @onclick="GoRequest">
+            <a href="/request">Создать запрос</a>
+        </div>
+        
+        <div class="header-block" @onclick="GoAbout">
+            <a href="/about">О нас</a>
+        </div>
+    </div>
+</header>
+
+@code {
+    private void GoHome() => NavigationManager.NavigateTo("/");
+    private void GoContacts() => NavigationManager.NavigateTo("/contacts");
+    private void GoRequest() => NavigationManager.NavigateTo("/request");
+    private void GoAbout() => NavigationManager.NavigateTo("/about");
+}
