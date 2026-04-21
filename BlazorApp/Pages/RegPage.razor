@@ -1,0 +1,52 @@
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
+@inject NavigationManager Nav
+
+@page "/register"
+<PageTitle>Регистрация</PageTitle>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Регистрация</h2>
+
+        <label>Логин</label>
+        <input type="text" @bind="_userName">
+
+        <label>Email</label>
+        <input type="email" @bind="_mail">
+
+        <label>Пароль</label>
+        <input type="password" @bind="_password">
+
+        <button @onclick="OnButtonClick">Зарегистрироваться</button>
+
+        <a href="/login">Есть аккаунт? Вход</a>
+    </div>
+</div>
+
+@code {
+    
+    [Inject] private RequestApi _apiRequest { get; set; }
+
+    private string _userName;
+    private string _mail;
+    private string _password;
+    private string _action = "Register"; 
+    
+    protected async Task OnButtonClick()
+    { 
+        var user = new UserAddData()
+        {
+            UserName = _userName,
+            Mail = _mail,
+            Password = _password,
+            Action = _action
+        };
+        var result = await _apiRequest.PostUserAsync(user);
+        Console.WriteLine(result);
+        if (result.Status)
+        {
+            Nav.NavigateTo("/userpage");
+        }
+    }
+}

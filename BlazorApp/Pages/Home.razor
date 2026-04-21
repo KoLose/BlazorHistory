@@ -1,26 +1,28 @@
-﻿@page "/"
+﻿@page "/home"
 @using BlazorApp.ApiRequest
 @using BlazorApp.ApiRequest.Model
 
 <PageTitle>Список запросов</PageTitle>
-<a href="/request">Создать новый запрос</a>
-<div class="cards">
-    @foreach (var image in images)
-    {
-        <div class="card">
-            <img src="@image.ImageUrl" alt="Document" />
+<main>
+    <a href="/request">Создать новый запрос</a>
+    <div class="cards">
+        @foreach (var image in images)
+        {
+            <div class="card">
+                <img src="@image.ImageUrl" alt="Document" />
             
-            @if (!string.IsNullOrEmpty(image.ExcelUrl))
-            {
-                <p><a href="@image.ExcelUrl" target="_blank">📥 Скачать Excel</a></p>
-            }
-            else
-            {
-                <p>Обработка...</p>
-            }
-        </div>
-    }
-</div>
+                @if (!string.IsNullOrEmpty(image.ExcelUrl))
+                {
+                    <p><a href="@image.ExcelUrl" target="_blank">📥 Скачать Excel</a></p>
+                }
+                else
+                {
+                    <p>Обработка...</p>
+                }
+            </div>
+        }
+    </div>
+</main>
 
 @code {
     private List<ImageDataShort> images = new();

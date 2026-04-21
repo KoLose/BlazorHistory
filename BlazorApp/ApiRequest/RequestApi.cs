@@ -71,4 +71,28 @@ public class RequestApi
             return new ImageAddData(); 
         }
     }
+    
+    public async Task<UserAddData> PostUserAsync(UserAddData user)
+    {
+        var url = "/PostUserRole";
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync(url, user).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            
+            var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            var userData = JsonSerializer.Deserialize<UserAddData>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            });
+            
+            return userData ?? new UserAddData();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка: {ex.Message}");
+            return new UserAddData();
+        }
+    }
 }

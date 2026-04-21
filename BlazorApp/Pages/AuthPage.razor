@@ -1,0 +1,68 @@
+@page "/login"
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
+@inject CurrentUser CurrentUser
+@inject NavigationManager Nav
+
+
+<PageTitle>Вход</PageTitle>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Вход</h2>
+
+        <label>Почта</label>
+        <input type="text" @bind="_mail">
+
+        <label>Пароль</label>
+        <input type="password" @bind="_password">
+
+        <button @onclick="OnButtonClick">Войти</button>
+
+        <a href="/register">Нет аккаунта? Регистрация</a>
+    </div>
+</div>
+
+@code
+{
+    [Inject] private RequestApi _apiRequest { get; set; }
+    
+    private string _mail;
+    private string _password;
+    private string _action = "Login";
+    
+    private async Task OnButtonClick()
+    {
+        
+        var user = new UserAddData()
+        {
+            Mail = _mail,
+            Password = _password,
+            Action = _action
+        };
+        
+        var result = await _apiRequest.PostUserAsync(user);
+
+        if (result != null)
+        {
+            CurrentUser.Login(result);
+        }
+        if (result.Status)
+        {
+            if (result.Role == "User")
+            {
+                Nav.NavigateTo("/userpage");
+            }
+
+            if (result.Role == "Admin")
+            {
+                Nav.NavigateTo("/adminpage");
+            }
+            
+        }
+        else
+        {
+            Console.WriteLine("Неправильная почта / пароль");
+        }
+    }
+}
