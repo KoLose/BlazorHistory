@@ -1,0 +1,59 @@
+@page "/AdminPanel"
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
+@inject RequestApi Api
+@inject NavigationManager Nav
+@inject CurrentUser CurrentUser
+
+@if (!CurrentUser.IsLoggedIn || CurrentUser.CurrentRole != "Admin")
+{
+    Nav.NavigateTo("/");
+    return;
+}
+
+<PageTitle>Список пользователей</PageTitle>
+
+<div class="admin-block container">
+<div class="cards-admin">
+    @foreach (var user in users)
+    {
+        <div class="card">
+            <div class="card-avatar">
+                <img src="@GetAvatarUrl(user.AvatarUrl)" alt="avatar" />
+            </div>
+            <p><strong>Имя:</strong> @user.UserName</p>
+            <p><strong>Почта:</strong> @user.Mail</p>
+            <p><strong>Роль:</strong> @user.RoleName</p>
+        </div>
+    }
+</div>
+</div>
+
+@code {
+    private List<UserDataShort> users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetAllUsers();
+    }
+
+    private async Task GetAllUsers()
+    {
+        var userData = await Api.GetAllUsersAsync();
+        users = userData?.data?.users?.Select(u => new UserDataShort 
+        { 
+            UserId = u.UserId,
+            UserName = u.UserName,
+            Mail = u.Mail,
+            AvatarUrl = u.AvatarUrl,
+            RoleName = u.RoleName
+        }).ToList() ?? new List<UserDataShort>();
+    }
+
+    private string GetAvatarUrl(string? url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return "https://img.freepik.com/free-psd/contact-icon-illustration-isolated_23-2151903337.jpg?semt=ais_hybrid&w=740&q=80";
+        return url;
+    }
+}

@@ -1,30 +1,43 @@
 @page "/"
+@using BlazorApp.ApiRequest
+@inject CurrentUser CurrentUser
+@inject NavigationManager Nav
 
-
-<section class="hero-section">
-    <div class="container">
-        <div class="hero-content">
-            
-            <div class="hero-text">
-                <div class="hero-badge">МЦК КТИТС</div>
-                <h1 class="hero-title">
-                    Твои данные,<br/>
-                    Твой анализ, <br/> <span class="highlight">ТВОЙ ОТЧËТ</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Единая платформа для автоматического анализа статистики, генерации Excel-таблиц и красивых PDF-отчётов за секунды
-                </p>
-                <a href="/login" class="hero-btn">Создать запрос</a>
-            </div>
-            
-            <div class="hero-image">
-                <img src="images/hello-page-logo.jpg" alt="Интерфейс" />
-            </div>
-
+<main>
+    
+    <div class="hello-global-block container">
+        
+        <div class="hello-text">
+            <div class="hello-badge">МЦК КТИТС</div>
+            <h1 class="hello-title">
+                Твои данные,<br/>
+                Твой анализ, <br/> <span class="highlight">ТВОЙ ОТЧËТ</span>
+            </h1>
+            <p class="hello-subtitle">
+                Единая платформа для автоматического анализа статистики, генерации Excel-таблиц и красивых PDF-отчётов за секунды
+            </p>
+            <a class="hello-btn" @onclick="GoRequest">Создать запрос</a>
         </div>
+
+        <div class="hello-image">
+            <img src="images/hello-page-logo.jpg" alt="Интерфейс"/>
+        </div>
+
     </div>
-</section>
+</main>
 
 @code {
-    
+
+    private void GoRequest()
+    {
+        if (CurrentUser.IsLoggedIn)
+        {
+            Nav.NavigateTo("/request");
+        }
+        else
+        {
+            Nav.NavigateTo("/login");
+        }
+    }
+
 }

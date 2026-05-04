@@ -6,23 +6,23 @@
 
 
 <PageTitle>Вход</PageTitle>
+<main>
+    <div class="auth-global-block container">
+            <div class="auth-card">
+                <h2>Вход</h2>
 
-<div class="auth-container">
-    <div class="auth-card">
-        <h2>Вход</h2>
+                <label>Почта</label>
+                <input type="text" @bind="_mail">
 
-        <label>Почта</label>
-        <input type="text" @bind="_mail">
+                <label>Пароль</label>
+                <input type="password" @bind="_password">
 
-        <label>Пароль</label>
-        <input type="password" @bind="_password">
+                <button @onclick="OnButtonClick">Войти</button>
 
-        <button @onclick="OnButtonClick">Войти</button>
-
-        <a href="/register">Нет аккаунта? Регистрация</a>
-    </div>
-</div>
-
+                <a href="/register">Нет аккаунта? Регистрация</a>
+            </div>
+        </div>
+</main>
 @code
 {
     [Inject] private RequestApi _apiRequest { get; set; }
@@ -49,12 +49,13 @@
         }
         if (result.Status)
         {
-            if (result.Role == "User")
+            Console.WriteLine(result.RoleName);
+            if (result.RoleName == "User")
             {
                 Nav.NavigateTo("/userpage");
             }
 
-            if (result.Role == "Admin")
+            if (result.RoleName == "Admin")
             {
                 Nav.NavigateTo("/adminpage");
             }

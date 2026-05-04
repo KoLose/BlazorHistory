@@ -4,10 +4,11 @@ namespace BlazorApp.ApiRequest;
 
 public class CurrentUser
 {
-    public int CurrentID;
+    public Guid CurrentID;
     public string CurrentName;
     public string CurrentMail;
     public string CurrentPassword;
+    public string CurrentAvatar;
     public string CurrentRole;
     public bool IsLoggedIn = false;
     
@@ -17,15 +18,8 @@ public class CurrentUser
         CurrentName = user.UserName;
         CurrentMail = user.Mail;
         CurrentPassword = user.Password;
-        CurrentRole = user.Role;
+        CurrentAvatar = user.AvatarUrl;
+        CurrentRole = user.RoleName;
         IsLoggedIn = true;
-        Console.WriteLine(CurrentRole);
-        Console.WriteLine(IsLoggedIn);
-    }
-    
-    public void Logout()
-    {
-        CurrentRole = "";
-        IsLoggedIn = false;
     }
 }

@@ -44,16 +44,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWJvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/AdminPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW5QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/AdminPanel.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW5QYW5lbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/AuthPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aFBhZ2UucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/Contacts.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29udGFjdHMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/CreateNew.razor]
@@ -62,10 +62,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/HelloPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSGVsbG9QYWdlLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/kolose/Development/ApiProjects/HistoryApp/BlazorApp/BlazorApp/Pages/RegPage.razor]

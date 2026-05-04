@@ -4,25 +4,26 @@
 
 @page "/register"
 <PageTitle>Регистрация</PageTitle>
+<main>
+    <div class="auth-global-block container">
+        <div class="auth-card">
+            <h2>Регистрация</h2>
 
-<div class="auth-container">
-    <div class="auth-card">
-        <h2>Регистрация</h2>
+            <label>Логин</label>
+            <input type="text" @bind="_userName">
 
-        <label>Логин</label>
-        <input type="text" @bind="_userName">
+            <label>Email</label>
+            <input type="email" @bind="_mail">
 
-        <label>Email</label>
-        <input type="email" @bind="_mail">
+            <label>Пароль</label>
+            <input type="password" @bind="_password">
 
-        <label>Пароль</label>
-        <input type="password" @bind="_password">
+            <button @onclick="OnButtonClick">Зарегистрироваться</button>
 
-        <button @onclick="OnButtonClick">Зарегистрироваться</button>
-
-        <a href="/login">Есть аккаунт? Вход</a>
+            <a href="/login">Есть аккаунт? Вход</a>
+        </div>
     </div>
-</div>
+</main>
 
 @code {
     
@@ -33,7 +34,7 @@
     private string _password;
     private string _action = "Register"; 
     
-    protected async Task OnButtonClick()
+    private async Task OnButtonClick()
     { 
         var user = new UserAddData()
         {

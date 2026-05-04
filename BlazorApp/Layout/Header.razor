@@ -2,37 +2,31 @@
 <header>
     <div class="header container">
     
-        <div class="header-block header-logo">
-            <img src="images/banana-logo.png" alt="Logo"/>
-            <a>Метрика</a>
+        <div class="global-block">
+            <div class="header-block header-logo">
+                <img src="images/banana-logo.png" alt="Logo" @onclick="GoHome"/>
+            </div>
         </div>
         
-        <div class="header-block" @onclick="GoHome">
-            <a href="/">Главное</a>
-        </div>
+        <div class="global-block">
+            <div class="header-block" @onclick="GoRequest">
+                <a href="/request">Мои запросы</a>
+            </div>
         
-        <div class="header-block" @onclick="GoContacts">
-            <a href="/contacts">Контакты</a>
-        </div>
+            <div class="header-block" @onclick="GoAbout">
+                <a href="/about">О нас</a>
+            </div>
         
-        <div class="header-block" @onclick="GoRequest">
-            <a href="/request">Создать запрос</a>
-        </div>
-        
-        <div class="header-block" @onclick="GoAbout">
-            <a href="/about">О нас</a>
-        </div>
-        
-        <div class="header-block" @onclick="GoUserPage">
-            <a href="/about">Аккаунт</a>
+            <div class="header-block" @onclick="GoUserPage">
+                <a href="/userpage">Аккаунт</a>
+            </div>
         </div>
     </div>
 </header>
 
 @code {
     private void GoHome() => NavigationManager.NavigateTo("/");
-    private void GoContacts() => NavigationManager.NavigateTo("/contacts");
     private void GoRequest() => NavigationManager.NavigateTo("/request");
     private void GoAbout() => NavigationManager.NavigateTo("/about");
-    private void GoUserPage() => NavigationManager.NavigateTo("/user");
+    private void GoUserPage() => NavigationManager.NavigateTo("/userpage");
 }

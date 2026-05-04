@@ -1,4 +1,4 @@
-@page "/userpage"
+@page "/adminpage"
 @using BlazorApp.ApiRequest
 @using BlazorApp.ApiRequest.Model
 @inject CurrentUser CurrentUser
@@ -36,6 +36,9 @@
 
             <button class="btn-edit" @onclick="OpenEditModal">Редактировать</button>
         </div>
+    </div>
+    <div class="admin-actions">
+        <button class="btn-admin" @onclick="GoToUsers">👥 Все пользователи</button>
     </div>
 </main>
 
@@ -157,5 +160,9 @@
         {
             Console.WriteLine($"Ошибка: {ex.Message}");
         }
+    }
+    private void GoToUsers()
+    {
+        Nav.NavigateTo("/AdminPanel");
     }
 }

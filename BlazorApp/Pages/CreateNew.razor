@@ -1,32 +1,88 @@
 @page "/request"
+@using BlazorApp.ApiRequest
+@using BlazorApp.ApiRequest.Model
 @inject BlazorApp.ApiRequest.RequestApi Api
-@inject NavigationManager Navigation
+@inject NavigationManager Nav
+@inject CurrentUser CurrentUser
+
+@if (!CurrentUser.IsLoggedIn)
+{ 
+    Nav.NavigateTo("/register");
+    return;
+}
 
 <PageTitle>Создать запрос</PageTitle>
-
-<h3>Загрузка документа</h3>
-
-<InputFile OnChange="HandleFileUpload" accept="image/*" />
+<div class="create-request-block container">
+<!-- Кнопка загрузки слева сверху -->
+<div class="upload-header">
+    <label class="custom-upload-btn">
+        <span>📤 Загрузить документ</span>
+        <InputFile OnChange="HandleFileUpload" accept="image/*" style="display: none;" />
+    </label>
+</div>
 
 @if (_isUploading)
 {
-    <div class="alert alert-info">⏳ Идет распознавание и создание Excel... Пожалуйста, подождите.</div>
+    <div class="status-message loading">⏳ Идет распознавание и создание Excel... Пожалуйста, подождите.</div>
 }
 
 @if (_errorMessage != null)
 {
-    <div class="alert alert-danger">❌ @_errorMessage</div>
+    <div class="status-message error">❌ @_errorMessage</div>
 }
 
 @if (_successMessage != null)
 {
-    <div class="alert alert-success">✅ @_successMessage</div>
+    <div class="status-message success">✅ @_successMessage</div>
 }
 
+<div class="cards-container">
+    @if (images != null && images.Any())
+    {
+        @foreach (var image in images)
+        {
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img src="@image.ImageUrl" alt="Document" />
+                </div>
+                <div class="card-content">
+                    
+                    @if (!string.IsNullOrEmpty(image.ExcelUrl))
+                    {
+                        <a href="@image.ExcelUrl" target="_blank" class="download-link">
+                            📥 Скачать Excel
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="processing-status">Обработка...</span>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else if (!_isUploading)
+    {
+        <p class="empty-state">У вас пока нет загруженных документов.</p>
+    }
+</div>
+</div>
 @code {
     private bool _isUploading = false;
     private string? _errorMessage;
     private string? _successMessage;
+    private List<ImageDataShort> images = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadImages();
+    }
+
+    private async Task LoadImages()
+    {
+        var imageData = await Api.GetAllImagesAsync(CurrentUser.CurrentID);
+        images = imageData?.data?.image ?? new List<ImageDataShort>();
+    }
 
     async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
@@ -36,6 +92,7 @@
         _errorMessage = null;
         _successMessage = null;
         _isUploading = true;
+        StateHasChanged();
 
         try
         {
@@ -43,6 +100,7 @@
             {
                 _errorMessage = "Пожалуйста, выберите изображение.";
                 _isUploading = false;
+                StateHasChanged();
                 return;
             }
 
@@ -50,12 +108,12 @@
             
             using var stream = file.OpenReadStream(maxAllowedSize: maxBytes);
             
-            var result = await Api.UploadImageAsync(stream, file.Name);
+            var result = await Api.TestPostRequest(stream, file.Name, CurrentUser.CurrentID);
 
             if (result.status)
             {
-                _successMessage = "Файл успешно обработан и сохранен!";
-                Navigation.NavigateTo("/counter");
+                _successMessage = "Файл успешно обработан!";
+                await LoadImages();
             }
             else
             {
@@ -69,6 +127,7 @@
         finally
         {
             _isUploading = false;
+            StateHasChanged();
         }
     }
 }
